@@ -6,6 +6,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.management.JMException;
 
+import java.awt.Image;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -42,6 +46,17 @@ public class Login extends JFrame{
 		this.getContentPane().setBackground(Color.black);
 		//this.setBounds(200,200,500,500);
 		
+                
+                try {
+                    
+                    Image iconImage = ImageIO.read(getClass().getResource("/images/3636172.png"));
+                    
+                    this.setIconImage(iconImage);
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+                
+                
                 JMenuBar barra = new JMenuBar();
                 this.setJMenuBar(barra);
                 
