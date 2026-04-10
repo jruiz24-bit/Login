@@ -1,14 +1,17 @@
 package login;
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import javax.management.JMException;
 
 import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -27,9 +30,9 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Login extends JFrame{
+public class Ventana extends JFrame{
 
-	public Login() {
+	public Ventana() {
 		
 		//CONFIGURACIONES BÁSICAS
 		
@@ -89,13 +92,71 @@ public class Login extends JFrame{
                 
 		//this.login();HUKG
 		//this.registro();
-		this.users();
+		//this.users();
                 
+                //this.calculadora();
+                
+                this.memorama();
 		this.setVisible(true);
 		this.repaint();
 		
 	}
 	
+        public void memorama()
+        {
+       
+        JPanel panel = new JPanel();
+        panel.setBounds(50, 50, 500, 600);
+        panel.setLayout(new BorderLayout());
+        this.add(panel);
+
+        
+        JPanel top = new JPanel();
+        top.setBackground(Color.CYAN);
+
+        JLabel movimientos = new JLabel("Movimientos: 0");
+        movimientos.setFont(new Font("Arial", Font.BOLD, 14));
+
+        JLabel pares = new JLabel("Pares: 0");
+        pares.setFont(new Font("Arial", Font.BOLD, 14));
+
+        top.add(movimientos);
+        top.add(pares);
+
+        panel.add(top, BorderLayout.NORTH);
+
+        
+        JPanel tablero = new JPanel();
+        tablero.setLayout(new GridLayout(4,4,10,10));
+        tablero.setBackground(Color.GRAY);
+
+        JButton[][] cartas = new JButton[4][4];
+
+        for(int i=0;i<4;i++){
+            for(int j=0;j<4;j++){
+
+                JButton btn = new JButton("?");
+                btn.setFont(new Font("Arial",Font.BOLD,20));
+                btn.setEnabled(false);
+
+                cartas[i][j] = btn;
+                tablero.add(btn);
+            }
+        }
+
+        panel.add(tablero, BorderLayout.CENTER);
+
+        
+        JPanel bottom = new JPanel();
+
+        JButton reiniciar = new JButton("Reiniciar");
+        reiniciar.setEnabled(false);
+
+        bottom.add(reiniciar);
+
+        panel.add(bottom, BorderLayout.SOUTH);
+    }
+        
 	public void login()
 	{
 		JPanel login_container = new JPanel();
@@ -105,7 +166,7 @@ public class Login extends JFrame{
 		login_container.setLayout(null);
 		this.add(login_container);
 		
-		//AÑADIENDO ELEMENTOS
+		
 		JLabel tag_title = new JLabel();
 		tag_title.setText("Bienvenido");
 		tag_title.setSize(150, 30);
@@ -142,7 +203,7 @@ public class Login extends JFrame{
 		JCheckBox rememberme = new JCheckBox("Hola");
 		rememberme.setSize(140, 40);
 		rememberme.setLocation(60, 300); 
-		//rememberme.setOpaque(false); 
+		
 		login_container.add(rememberme);
 		
 		JButton access_btn = new JButton();
@@ -152,6 +213,46 @@ public class Login extends JFrame{
 		login_container.add(access_btn);
 	}
 	
+        public void calculadora()
+        {
+            JPanel panel_users = new JPanel();
+            panel_users.setSize(500,500);
+            panel_users.setLocation(250,50);
+            panel_users.setBackground(Color.decode("#DDDEA6"));
+            panel_users.setLayout(null);
+            this.add(panel_users);
+            
+            JLabel field = new JLabel("180.00");
+            field.setSize(400,40);
+            field.setLocation(10,10);
+            field.setOpaque(true);
+            field.setBackground(Color.white);
+            field.setFont(new Font("Arial",Font.BOLD,22));
+            field.setBorder(BorderFactory.createEmptyBorder(10,20,10,20));
+            panel_users.add(field);
+            
+            int cor_x = 30, cor_y = 60;
+            String [] botones = {"CE","","","","7","8","9","/","4","5","6","*","1","2","3","+","0",".","-","="};
+            
+            for (int i = 0; i<20; i++)
+            {
+                JButton ce = new JButton(botones[i]);
+                ce.setSize(100,100);
+                ce.setLocation(cor_x, cor_y);
+                
+                cor_x += 110;
+                panel_users.add(ce);
+                
+                if(cor_x >= 420)
+                {
+                    cor_x = 30;
+                    cor_y += 110; 
+                }
+                
+            }
+            
+        }
+        
 	public void registro() {
 		
 		JPanel rgs_container = new JPanel();
